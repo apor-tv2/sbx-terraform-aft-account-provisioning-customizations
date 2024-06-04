@@ -1,19 +1,19 @@
-data "aws_ssm_parameter" "vpc_cidr" {
-	name = "vpc_cidr"
-}
-resource "aws_vpc" "main" {
-	cidr_block = data.aws_ssm_parameter.vpc_cidr.value
-}
-
-# private subnets
-data "aws_ssm_parameter" "vpc_cidr_private_AZa" {
-	name = "vpc_cidr_private_AZa" 
-}
-resource "aws_subnet" "private_subnet_a" {
-	#count = (length(data.aws_ssm_parameter.vpc_cidr_private_AZa.value) > 0)
-	vpc_id = aws_vpc.main.id
-	cidr_block = data.aws_ssm_parameter.vpc_cidr_private_AZa.value
-}
+#data "aws_ssm_parameter" "vpc_cidr" {
+#	name = "vpc_cidr"
+#}
+#resource "aws_vpc" "main" {
+#	cidr_block = data.aws_ssm_parameter.vpc_cidr.value
+#}
+#
+## private subnets
+#data "aws_ssm_parameter" "vpc_cidr_private_AZa" {
+#	name = "vpc_cidr_private_AZa" 
+#}
+#resource "aws_subnet" "private_subnet_a" {
+#	#count = (length(data.aws_ssm_parameter.vpc_cidr_private_AZa.value) > 0)
+#	vpc_id = aws_vpc.main.id
+#	cidr_block = data.aws_ssm_parameter.vpc_cidr_private_AZa.value
+#}
 #data "aws_ssm_parameter" "vpc_cidr_private_AZb" {
 #}
 #resource "aws_subnet" "private_subnet_b" {
