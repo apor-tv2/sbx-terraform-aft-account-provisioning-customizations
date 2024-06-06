@@ -1,7 +1,14 @@
-#data "aws_ssm_parameter" "vpc_cidr" {
-#	name = "vpc_cidr"
-#}
+locals {
+        aft_ssm_custom_fields_prefix = "/aft/account-request/custom-fields"
+}
+data "aws_ssm_parameter" "vpc_cidr" {
+	name = "${var.aft_ssm_custom_fields_prefix}/vpc_cidr"
+}
+output VPCCIDR {
+        value = data.aws_ssm_parameter.vpc_cidr.value
+}
 #resource "aws_vpc" "main" {
+#	#count = (length(data.aws_ssm_parameter.vpc_cidr_private_AZa.value) > 0)
 #	cidr_block = data.aws_ssm_parameter.vpc_cidr.value
 #}
 #
