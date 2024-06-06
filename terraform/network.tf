@@ -2,7 +2,7 @@ locals {
         aft_ssm_custom_fields_prefix = "/aft/account-request/custom-fields"
 }
 data "aws_ssm_parameter" "vpc_cidr" {
-	name = "${var.aft_ssm_custom_fields_prefix}/vpc_cidr"
+	name = "${local.aft_ssm_custom_fields_prefix}/vpc_cidr"
 }
 output VPCCIDR {
         value = data.aws_ssm_parameter.vpc_cidr.value
