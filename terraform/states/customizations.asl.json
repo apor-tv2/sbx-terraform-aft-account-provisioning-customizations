@@ -1,9 +1,32 @@
 {
-    "StartAt": "Pass",
-    "States": {
-      "Pass": {
-        "Type": "Pass",
-        "End": true
+  "StartAt": "Assign variables",
+  "QueryLanguage": "JSONata",
+  "States": {
+    "Assign variables": {
+      "Type": "Pass",
+      "Next": "GetCallerIdentity",
+      "Assign": {
+        "NewAccountID": "{% $states.input.account_info.account.id %}",
+        "NewAccountEmail": "{% $states.input.account_info.account.email %}"
       }
+    },
+    "GetCallerIdentity": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::aws-sdk:sts:getCallerIdentity",
+      "Next": "SNS Publish",
+      "Arguments": {}
+    },
+    "SNS Publish": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Arguments": {
+        "TopicArn": "{% 'arn:aws:sns:eu-central-1:' & $states.input.Account & ':aft-notificatons-orgreadable' %}",
+        "Message": {
+          "Email": "{% $NewAccountEmail %}",
+          "AccountID": "{% $NewAccountID %}"
+        }
+      },
+      "End": true
     }
+  }
 }

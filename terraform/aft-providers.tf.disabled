@@ -1,0 +1,17 @@
+# To use this file
+# ln -s aft-providers.tf.disabled aft-providers.tf
+#aft-providers.tf
+## Auto generated providers.tf ##
+## Updated on: 2025-08-27 07:47:50 ##
+provider "aws" {
+  region = "eu-central-1"
+  assume_role {
+    role_arn    = "arn:aws:iam::352190605276:role/AWSAFTExecution"
+  }
+  default_tags {
+    tags = {
+      managed_by                  = "AFT"
+    }
+  }
+}
+

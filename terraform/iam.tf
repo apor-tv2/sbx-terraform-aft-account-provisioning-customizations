@@ -9,5 +9,6 @@ resource "aws_iam_role_policy" "aft_states" {
 
   policy = templatefile("${path.module}/iam/role-policies/iam-aft-states.tpl", {
     account_provisioning_customizations_sfn_arn = aws_sfn_state_machine.aft_account_provisioning_customizations.arn
+    sns_topic_arn = module.sns_topic.topic_arn
   })
 }

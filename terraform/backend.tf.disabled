@@ -1,0 +1,17 @@
+# To use this file 
+# ln -s backend.tf.disabled backend.tf
+#backend.tf
+## Auto generated backend.tf ##
+## Updated on: 2025-08-27 07:47:50 ##
+terraform {
+  required_version = ">= 0.15.0"
+  backend "s3" {
+    region         = "eu-central-1"
+    bucket         = "aft-backend-352190605276-primary-region"
+    key            = "account-provisioning-customizations/terraform.tfstate"
+    dynamodb_table = "aft-backend-352190605276"
+    encrypt        = "true"
+    kms_key_id     = "cbe50782-f739-4c2a-b7be-62f095004ddf"
+    role_arn       = "arn:aws:iam::352190605276:role/AWSAFTExecution"
+  }
+}
